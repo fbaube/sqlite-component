@@ -1,0 +1,23 @@
+# Indentation is important!
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  # "name" is globally unique. It is not cross-referenced
+  # anywhere, so it can be changed freely without side effects.
+  # It is the name that appears in "wash app list".
+  # It is the name used in "wash call", like so:
+  # wash call sqlite_invoker_app-invoker example:invoker/invoker.call
+  name: sqlite-invoker-app 
+  annotations:
+    description: Prelim SQLte connectivity demo
+    wasmcloud.dev/categories: go,example
+spec:
+  components:
+    - name: invoker
+      type: component
+      properties:
+        image: file://./build/invoke_s.wasm
+      traits:
+        - type: spreadscaler
+          properties:
+            replicas: 1
