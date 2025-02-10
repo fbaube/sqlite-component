@@ -9,3 +9,27 @@ world example {
   include wasmcloud:component-go/imports@0.1.0;
   export invoker;
 }
+
+/*
+Possible API:
+- get1: Check for equality on row ID or other unique column.
+  name (string) can be either (a) tableName (this assumes ID column)
+  or (b) tableName.colName (column must be "UNIQUE").
+  get1: (name,value) -> (row,error) 
+- getset: Check for simple condition on column (need not be "UNIQUE").
+  (table,field,cond,value) -> (rows,errors)
+
+Postgres API:
+record result-row-entry {
+    /// Name of the result column
+    column-name: string,
+    /// Value of the result column
+    value: pg-value,
+  }
+  /// A result-row is a list of (colName + colValue) i.e. []colKV
+  type result-row = list<result-row-entry>;
+  /// A query is an (opaque) SQL string plus a list of values,
+  /// returning either (a list of results-rows) or (a single error).
+  query: func(query: string, params: list<pg-value>) -> result<list<result-row>, query-error>;
+
+*/
