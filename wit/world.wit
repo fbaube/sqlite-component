@@ -15,9 +15,9 @@ Possible API:
 - get1: Check for equality on row ID or other unique column.
   name (string) can be either (a) tableName (this assumes ID column)
   or (b) tableName.colName (column must be "UNIQUE").
-  get1: (name,value) -> (row,error) 
+  get1: func(name:string,value:any) -> (row,error) 
 - getset: Check for simple condition on column (need not be "UNIQUE").
-  (table,field,cond,value) -> (rows,errors)
+  (table:string,field:string,cond:string,value:any) -> (rows,errors)
 
 Postgres API:
 record result-row-entry {

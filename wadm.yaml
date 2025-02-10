@@ -11,13 +11,24 @@ metadata:
   annotations:
     description: Prelim SQLte connectivity demo
     wasmcloud.dev/categories: go,example
+    version: 0.0.1 # (optional, but autogen is orgly) 
 spec:
   components:
     - name: invoker
       type: component
       properties:
+      # image may point to a local .wasm binary,
+      # or an OCI artifact in an OCI registry
         image: file://./build/invoke_s.wasm
+      # id: (optional; if none is provided, wadm assigns
+      # a generated identifier, which is a combo of the
+      # manifest name and the component name.)
+      # config: (optional; generally most useful for
+      # making arbitrary data available at runtime
+      # via the wasi-runtime-config interface.)
       traits:
+      # Traits are metadata associated with a component.
+      # Supported: spreadscaler, daemonscaler, link.
         - type: spreadscaler
           properties:
             replicas: 1
